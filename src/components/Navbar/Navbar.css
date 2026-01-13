@@ -34,6 +34,7 @@
 
 .app__navbar-links li:hover {
     color: var(--color-grey);
+    border-bottom: 1px solid var(--color-golden);
 }
 
 .app__navbar-login {
@@ -49,13 +50,13 @@
 }
 
 .app__navbar-login a:hover {
+    color: var(--color-grey);
     border-bottom: 1px solid var(--color-golden);
 }
 
 .app__navbar-login div {
     width: 1px;
-    height: 30px;
-    background: var(--color-grey);
+    height: 30px; 
 }
 
 .app__navbar-smallscreen {
