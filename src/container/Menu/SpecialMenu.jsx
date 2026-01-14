@@ -3,6 +3,7 @@ import React from 'react';
 import { SubHeading, MenuItem } from '../../components';
 import { data, images } from '../../constants';
 import './SpecialMenu.css';
+import { Card3DCarousel } from '../../components/3d-card-carousel/3d-card-carousel';
 
 const SpecialMenu = () => (
   <div className="app__specialMenu flex__center section__padding" id="menu">
@@ -16,7 +17,12 @@ const SpecialMenu = () => (
         <p className="app__specialMenu-menu_heading">Refreshing Beverage</p>
         <div className="app__specialMenu_menu_items">
           {data.aireMenuData.refreshingBeverage.shakes.map((item, index) => (
-            <MenuItem key={index} title={item.name} price={item.price} tags={item.tags} />
+            <MenuItem
+              key={index}
+              title={item.name}
+              price={item.price}
+              tags={item.tags}
+            />
           ))}
         </div>
       </div>
@@ -29,14 +35,19 @@ const SpecialMenu = () => (
         <p className="app__specialMenu-menu_heading">Grilled And Baked</p>
         <div className="app__specialMenu_menu_items">
           {data.aireMenuData.grilledAndBaked.pizzas.map((item, index) => (
-            <MenuItem key={index} title={item.name} price={item.price} tags={item.tags} />
+            <MenuItem
+              key={index}
+              title={item.name}
+              price={item.price}
+              tags={item.tags}
+            />
           ))}
         </div>
       </div>
     </div>
 
     <div style={{ marginTop: 15 }}>
-      <button type="button" className="custom__button">View More</button>
+      <Card3DCarousel />
     </div>
   </div>
 );
