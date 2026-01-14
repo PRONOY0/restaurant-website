@@ -1,11 +1,27 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import { MenuImages } from '../../constants/MenuImg';
 
 export function Card3DCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
+  const [canZoom, setCanZoom] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 768px)');
+
+    const updateZoomCapability = () => {
+      setCanZoom(mediaQuery.matches);
+    };
+
+    updateZoomCapability();
+    mediaQuery.addEventListener('change', updateZoomCapability);
+
+    return () => {
+      mediaQuery.removeEventListener('change', updateZoomCapability);
+    };
+  }, []);
 
   const goToPrevious = () => {
     setCurrentIndex(
@@ -18,6 +34,7 @@ export function Card3DCarousel() {
   };
 
   const toggleZoom = () => {
+    if (!canZoom) return;
     setIsZoomed((prev) => !prev);
   };
 
@@ -31,9 +48,8 @@ export function Card3DCarousel() {
 
   return (
     <div className="carousel-container">
-      {isZoomed && (
+      {isZoomed && canZoom && (
         <div className="overlay" onClick={toggleZoom}>
-          {/* Stop click from bubbling to overlay */}
           <div className="content" onClick={(e) => e.stopPropagation()}>
             <img
               src={MenuImages[currentIndex].url}
@@ -73,7 +89,7 @@ export function Card3DCarousel() {
                   opacity,
                   top: '50%',
                   left: '50%',
-                  marginLeft: '-50%',
+                  marginLeft: '-60%',
                   marginTop: '-50%',
                   width: 'fit-content',
                   height: 'fit-content',
@@ -91,7 +107,7 @@ export function Card3DCarousel() {
                     className="card-image"
                   />
 
-                  {isActive && (
+                  {isActive && canZoom && (
                     <div className="card-overlay">
                       <p className="overlay-text">Click to zoom</p>
                     </div>
